@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shouvik Choudhury | Agentic AI Engineer</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;1,300&family=Instrument+Serif:ital@0;1&display=swap">
+    <style>
+        /* --- CORE STYLES --- */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body { background: #05080e; color: #f0f4f8; font-family: 'DM Mono', monospace; overflow-x: hidden; }
+        
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #05080e; }
+        ::-webkit-scrollbar-thumb { background: #1a2233; border-radius: 3px; }
+
+        /* --- UTILITIES --- */
+        .reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.7s ease, transform 0.7s ease; }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+        
+        .blob { position: absolute; border-radius: 50%; filter: blur(80px); pointer-events: none; z-index: 0; }
+
+        /* --- NAV --- */
+        nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 999;
+            display: flex; justify-content: space-between; alignItems: center;
+            padding: 0 48px; height: 64px; background: rgba(5,8,14,0.7);
+            backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255,255,255,0.06);
+            align-items: center;
+        }
+        .nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; fontSize: 15px; letter-spacing: 0.2em; color: #22d3ee; text-decoration: none; }
+        .nav-links { display: flex; gap: 8px; }
+        .nav-btn {
+            background: transparent; border: 1px solid transparent; color: rgba(255,255,255,0.4);
+            padding: 6px 16px; border-radius: 999px; cursor: pointer; font-size: 11px;
+            letter-spacing: 0.1em; font-family: 'DM Mono', monospace; transition: all 0.2s;
+        }
+        .nav-btn.active { background: rgba(34,211,238,0.1); border: 1px solid rgba(34,211,238,0.3); color: #22d3ee; }
+
+        /* --- HERO --- */
+        section { padding: 100px 48px; position: relative; max-width: 1100px; margin: 0 auto; }
+        #about { min-height: 100vh; display: flex; align-items: center; max-width: 100%; }
+        .hero-content { max-width: 860px; position: relative; z-index: 1; }
+        
+        .status-badge {
+            display: inline-flex; align-items: center; gap: 8px; border: 1px solid rgba(34,211,238,0.25);
+            border-radius: 999px; padding: 6px 16px; margin-bottom: 32px; background: rgba(34,211,238,0.04);
+        }
+        .pulse { width: 7px; height: 7px; border-radius: 50%; background: #22d3ee; box-shadow: 0 0 8px #22d3ee; animation: pulse-anim 2s infinite; }
+        @keyframes pulse-anim { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+        h1 { font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(52px, 8vw, 100px); line-height: 0.95; letter-spacing: -0.03em; margin-bottom: 16px; }
+        .outline-text { -webkit-text-stroke: 1px rgba(34,211,238,0.35); color: transparent; }
+
+        .role-switcher { font-family: 'Instrument Serif', serif; font-style: italic; font-size: clamp(20px, 2.5vw, 28px); color: rgba(255,255,255,0.45); height: 40px; margin-bottom: 28px; }
+
+        .summary { font-size: 14px; color: rgba(255,255,255,0.4); max-width: 560px; line-height: 1.9; margin-bottom: 48px; }
+
+        .cta-group { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 72px; }
+        .btn-primary { background: #22d3ee; color: #000; padding: 13px 32px; border-radius: 999px; font-family: 'Syne', sans-serif; font-weight: 700; text-decoration: none; font-size: 12px; box-shadow: 0 0 32px rgba(34,211,238,0.25); transition: 0.2s; }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 48px rgba(34,211,238,0.5); }
+        .btn-secondary { border: 1px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.5); padding: 13px 32px; border-radius: 999px; text-decoration: none; font-size: 12px; transition: 0.2s; }
+        .btn-secondary:hover { border-color: rgba(34,211,238,0.4); color: #22d3ee; }
+
+        /* --- BENTO BOXES --- */
+        .stats-grid { display: flex; gap: 16px; flex-wrap: wrap; }
+        .stat-card { flex: 1 1 100px; border: 1px solid rgba(255,255,255,0.07); border-radius: 16px; padding: 20px 24px; background: rgba(255,255,255,0.02); backdrop-filter: blur(10px); }
+        .stat-card h3 { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 32px; color: #22d3ee; }
+        
+        .experience-card { border-radius: 20px; border: 1px solid rgba(255,255,255,0.07); background: linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(34,211,238,0.02) 100%); overflow: hidden; }
+        .card-header { padding: 32px 40px; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; justify-content: space-between; align-items: center; background: rgba(34,211,238,0.03); }
+
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+        .skill-card { border: 1px solid rgba(255,255,255,0.07); border-radius: 20px; padding: 28px; background: rgba(255,255,255,0.02); transition: 0.3s; }
+        .skill-card:hover { border-color: rgba(34,211,238,0.3); transform: translateY(-4px); }
+        .tag { font-size: 11px; padding: 4px 12px; border-radius: 999px; background: rgba(34,211,238,0.06); border: 1px solid rgba(34,211,238,0.15); color: rgba(34,211,238,0.8); margin: 4px; display: inline-block; }
+
+        .divider { width: calc(100% - 96px); margin: 0 auto; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent); }
+
+        footer { border-top: 1px solid rgba(255,255,255,0.06); padding: 24px 48px; display: flex; justify-content: space-between; font-size: 11px; color: rgba(255,255,255,0.2); }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="#" class="nav-logo">SC<span style="color:rgba(255,255,255,0.2)">.</span></a>
+        <div class="nav-links">
+            <button class="nav-btn active" data-sec="about">About</button>
+            <button class="nav-btn" data-sec="experience">Experience</button>
+            <button class="nav-btn" data-sec="skills">Skills</button>
+            <button class="nav-btn" data-sec="projects">Projects</button>
+            <button class="nav-btn" data-sec="contact">Contact</button>
+        </div>
+    </nav>
+
+    <section id="about">
+        <div class="blob" style="width: 700px; height: 700px; background: radial-gradient(circle, rgba(34,211,238,0.07), transparent 70%); top: 50%; left: 60%; transform: translate(-50%,-50%);"></div>
+        <div class="hero-content">
+            <div class="status-badge reveal">
+                <span class="pulse"></span>
+                <span style="font-size: 11px; color: #22d3ee; letter-spacing: 0.15em;">OPEN TO OPPORTUNITIES</span>
+            </div>
+            <h1 class="reveal">Shouvik<br><span class="outline-text">Choudhury</span></h1>
+            <div class="role-switcher reveal" id="role-text">Agentic AI Engineer</div>
+            <p class="summary reveal">AI Systems Engineer specializing in agentic workflows and autonomous orchestration. 3+ years building intelligent data pipelines and scalable LLM-driven applications.</p>
+            <div class="cta-group reveal">
+                <a href="mailto:shouviksc99@gmail.com" class="btn-primary">Hire Me</a>
+                <a href="https://linkedin.com/in/shouvik-choudhury" target="_blank" class="btn-secondary">LinkedIn ↗</a>
+            </div>
+            <div class="stats-grid reveal">
+                <div class="stat-card"><h3>3+</h3><p style="font-size:10px; color:rgba(255,255,255,0.3)">Years Exp.</p></div>
+                <div class="stat-card"><h3>9.70</h3><p style="font-size:10px; color:rgba(255,255,255,0.3)">CGPA</p></div>
+                <div class="stat-card"><h3>40%</h3><p style="font-size:10px; color:rgba(255,255,255,0.3)">Latency Cut</p></div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <section id="experience">
+        <div class="reveal">
+            <p style="font-size: 10px; letter-spacing: 0.25em; color: #22d3ee; margin-bottom: 8px;">// PROFESSIONAL EXPERIENCE</p>
+            <h2 style="font-family: 'Syne', sans-serif; font-size: clamp(36px,5vw,60px); margin-bottom: 48px;">Where I've<br><span style="color: rgba(255,255,255,0.2)">made impact.</span></h2>
+        </div>
+        <div class="experience-card reveal">
+            <div class="card-header">
+                <div>
+                    <div style="font-family: 'Syne', sans-serif; font-weight: 700; font-size: 22px;">AWS Engineer</div>
+                    <div style="color: #22d3ee; font-size: 13px;">@ Cognizant</div>
+                </div>
+                <div class="tag">2022 — Present</div>
+            </div>
+            <div style="padding: 40px;">
+                <p style="color: rgba(255,255,255,0.5); line-height: 1.8;">Architected scalable data ingestion frameworks using Python & AWS, improving processing throughput by 30%. Developed self-healing LLM-driven pipelines to auto-detect and correct quality issues.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <section id="skills">
+        <div class="reveal">
+            <p style="font-size: 10px; letter-spacing: 0.25em; color: #22d3ee; margin-bottom: 8px;">// CORE COMPETENCIES</p>
+            <h2 style="font-family: 'Syne', sans-serif; font-size: clamp(36px,5vw,60px); margin-bottom: 48px;">Tech I work<br><span style="color: rgba(255,255,255,0.2)">with every day.</span></h2>
+        </div>
+        <div class="skills-grid">
+            <div class="skill-card reveal">
+                <div style="font-size: 28px; margin-bottom: 14px;">🤖</div>
+                <div style="font-weight: 700; margin-bottom: 16px;">Agentic AI</div>
+                <div class="tag">LangChain</div><div class="tag">RAG</div><div class="tag">Autonomous Agents</div>
+            </div>
+            <div class="skill-card reveal">
+                <div style="font-size: 28px; margin-bottom: 14px;">☁️</div>
+                <div style="font-weight: 700; margin-bottom: 16px;">Cloud</div>
+                <div class="tag">AWS S3/EC2</div><div class="tag">Airflow</div><div class="tag">Terraform</div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <span>© 2026 Shouvik Choudhury</span>
+        <span>Built with HTML/JS</span>
+    </footer>
+
+    <script>
+        // --- ROLE SWITCHER ---
+        const roles = ["Agentic AI Engineer", "AWS Specialist", "LLM Systems Builder"];
+        let count = 0;
+        const roleEl = document.getElementById('role-text');
+        setInterval(() => {
+            count++;
+            roleEl.style.opacity = 0;
+            setTimeout(() => {
+                roleEl.innerText = roles[count % roles.length];
+                roleEl.style.opacity = 1;
+            }, 500);
+        }, 3000);
+
+        // --- REVEAL ON SCROLL ---
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // --- NAV HIGHLIGHTING ---
+        const navBtns = document.querySelectorAll('.nav-btn');
+        navBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const id = btn.getAttribute('data-sec');
+                document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+    </script>
+</body>
+</html>
