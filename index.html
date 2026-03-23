@@ -30,7 +30,6 @@
       overflow-x: hidden;
     }
 
-    /* ── NOISE OVERLAY ── */
     body::before {
       content: '';
       position: fixed;
@@ -41,7 +40,6 @@
       opacity: 0.5;
     }
 
-    /* ── GRID BACKGROUND ── */
     body::after {
       content: '';
       position: fixed;
@@ -54,7 +52,6 @@
       z-index: 0;
     }
 
-    /* ── NAV ── */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -83,6 +80,7 @@
       display: flex;
       gap: 36px;
       list-style: none;
+      align-items: center;
     }
 
     .nav-links a {
@@ -96,7 +94,6 @@
 
     .nav-links a:hover { color: var(--accent); }
 
-    /* Mobile Menu Toggle */
     .menu-toggle {
       display: none;
       background: none;
@@ -107,7 +104,24 @@
       z-index: 101;
     }
 
-    /* ── HERO ── */
+    .nav-github {
+      color: var(--muted);
+      transition: color 0.2s, transform 0.2s;
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-github:hover {
+      color: var(--accent);
+      transform: scale(1.15);
+    }
+
+    .nav-github svg {
+      width: 22px;
+      height: 22px;
+      fill: currentColor;
+    }
+
     #hero {
       position: relative;
       min-height: 100vh;
@@ -248,8 +262,8 @@
       transition: border-color 0.2s, color 0.2s, background 0.2s;
     }
 
-    .btn-outline:hover { 
-      border-color: var(--accent); 
+    .btn-outline:hover {
+      border-color: var(--accent);
       color: var(--accent);
       background: rgba(0,229,255,0.05);
     }
@@ -287,7 +301,6 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* ── SECTION BASE ── */
     section {
       position: relative;
       z-index: 1;
@@ -317,7 +330,6 @@
       letter-spacing: -0.02em;
     }
 
-    /* ── DIVIDER ── */
     .divider {
       width: 100%;
       height: 1px;
@@ -325,7 +337,6 @@
       margin: 0 auto;
     }
 
-    /* ── REUSABLE CARD STYLE ── */
     .card {
       border: 1px solid var(--border);
       border-radius: 8px;
@@ -336,14 +347,13 @@
       overflow: hidden;
       transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
     }
-    
+
     .card:hover {
       border-color: rgba(0,229,255,0.3);
       transform: translateY(-4px);
       box-shadow: 0 10px 30px rgba(0,0,0,0.5);
     }
 
-    /* ── EXPERIENCE ── */
     .exp-card::before {
       content: '';
       position: absolute;
@@ -409,7 +419,6 @@
       font-size: 12px;
     }
 
-    /* ── SKILLS ── */
     .skills-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -451,7 +460,6 @@
       letter-spacing: 0.05em;
     }
 
-    /* ── PROJECTS ── */
     .projects-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -481,7 +489,7 @@
       font-size: 11px;
       color: var(--accent);
       letter-spacing: 0.08em;
-      margin-bottom: 24px;
+      margin-bottom: 16px;
       line-height: 1.5;
     }
 
@@ -505,7 +513,50 @@
       font-size: 12px;
     }
 
-    /* ── CERTIFICATIONS ── */
+    /* ── PROJECT DEMO LINK ── */
+    .project-demo-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--accent);
+      border: 1px solid rgba(0,229,255,0.25);
+      border-radius: 4px;
+      background: rgba(0,229,255,0.05);
+      transition: background 0.2s, box-shadow 0.2s, transform 0.2s, border-color 0.2s;
+      position: relative;
+      z-index: 2;
+    }
+
+    .project-demo-link:hover {
+      background: rgba(0,229,255,0.12);
+      border-color: var(--accent);
+      box-shadow: 0 0 20px rgba(0,229,255,0.2);
+      transform: translateY(-2px);
+    }
+
+    .project-demo-link svg {
+      width: 14px;
+      height: 14px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      transition: transform 0.2s;
+    }
+
+    .project-demo-link:hover svg {
+      transform: translate(2px, -2px);
+    }
+
     .certs-row { display: flex; flex-wrap: wrap; gap: 16px; }
 
     .cert-chip {
@@ -522,7 +573,7 @@
       min-width: 260px;
     }
 
-    .cert-chip:hover { 
+    .cert-chip:hover {
       border-color: rgba(0,229,255,0.3);
       background: rgba(13, 17, 23, 0.9);
     }
@@ -542,7 +593,6 @@
       margin-bottom: 2px;
     }
 
-    /* ── EDUCATION ── */
     .edu-card {
       display: flex;
       justify-content: space-between;
@@ -569,16 +619,15 @@
       line-height: 1;
     }
 
-    .edu-gpa-label { 
-      font-size: 11px; 
-      letter-spacing: 0.12em; 
-      color: var(--muted); 
-      text-transform: uppercase; 
-      text-align: right; 
+    .edu-gpa-label {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      text-transform: uppercase;
+      text-align: right;
       margin-top: 4px;
     }
 
-    /* ── CONTACT ── */
     #contact { border-top: 1px solid var(--border); }
 
     .contact-grid {
@@ -617,8 +666,8 @@
       transition: border-color 0.2s, transform 0.2s;
     }
 
-    .contact-item:hover:not(.no-hover) { 
-      border-color: rgba(0,229,255,0.3); 
+    .contact-item:hover:not(.no-hover) {
+      border-color: rgba(0,229,255,0.3);
       transform: translateX(8px);
     }
 
@@ -626,7 +675,6 @@
     .contact-item-text { font-size: 14px; color: var(--text); font-weight: bold;}
     .contact-item-label { font-size: 11px; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 2px;}
 
-    /* ── FOOTER ── */
     footer {
       position: relative;
       z-index: 1;
@@ -641,7 +689,6 @@
       background: rgba(8,12,16,0.9);
     }
 
-    /* ── SCROLL REVEAL ── */
     .reveal {
       opacity: 0;
       transform: translateY(30px);
@@ -653,15 +700,12 @@
       transform: translateY(0);
     }
 
-    /* ── RESPONSIVE DESIGN (MOBILE) ── */
     @media (max-width: 768px) {
-      /* Typography & Spacing */
       nav { padding: 16px 24px; }
       #hero { padding: 120px 24px 60px; }
       section { padding: 80px 24px; }
       .card, .edu-card { padding: 24px; }
-      
-      /* Mobile Menu */
+
       .menu-toggle { display: block; }
       .nav-links {
         position: absolute;
@@ -682,14 +726,16 @@
       }
       .nav-links li { border-bottom: 1px solid rgba(255,255,255,0.05); }
       .nav-links li:last-child { border-bottom: none; }
-      .nav-links a { 
-        padding: 20px 24px; 
-        display: block; 
-        font-size: 14px; 
-        letter-spacing: 0.2em; 
+      .nav-links a {
+        padding: 20px 24px;
+        display: block;
+        font-size: 14px;
+        letter-spacing: 0.2em;
+      }
+      .nav-links .nav-github {
+        padding: 20px 24px;
       }
 
-      /* Hero Mobile Fixes */
       .hero-cta { flex-direction: column; width: 100%; }
       .btn-primary, .btn-outline { width: 100%; text-align: center; }
       .hero-stats {
@@ -703,12 +749,12 @@
       }
       .stat { text-align: left; }
 
-      /* Grid Collapses */
       .contact-grid { grid-template-columns: 1fr; gap: 40px; }
       .edu-card { flex-direction: column; align-items: flex-start; text-align: left; }
       .edu-gpa-label { text-align: left; }
-      
-      /* Footer */
+
+      .projects-grid { grid-template-columns: 1fr; }
+
       footer { flex-direction: column; gap: 16px; text-align: center; padding: 32px 24px; }
     }
   </style>
@@ -724,6 +770,11 @@
       <li><a href="#projects">Projects</a></li>
       <li><a href="#certifications">Certs</a></li>
       <li><a href="#contact">Contact</a></li>
+      <li>
+        <a href="https://github.com/Shouvik599" target="_blank" class="nav-github" aria-label="GitHub Profile">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+        </a>
+      </li>
     </ul>
   </nav>
 
@@ -841,6 +892,7 @@
     <p class="section-label reveal">Projects</p>
     <h2 class="section-title reveal">Things I've<br/>built.</h2>
     <div class="projects-grid">
+
       <div class="card project-card reveal">
         <div class="project-num">01</div>
         <div class="project-title">ShantiView: AI Mental Health Companion</div>
@@ -851,7 +903,29 @@
           <li>Built a chatbot leveraging LLMs for empathetic, context-aware emotional support conversations.</li>
           <li>Implemented news &amp; statistics fetcher using AI-powered web scraping for corporate health trends.</li>
         </ul>
+        <a href="https://shouvik99-shantiview.hf.space" target="_blank" class="project-demo-link">
+          Live Demo
+          <svg viewBox="0 0 24 24"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+        </a>
       </div>
+
+      <div class="card project-card reveal">
+        <div class="project-num">02</div>
+        <div class="project-title">Sacred Texts RAG: Multi-Religion Knowledge Base</div>
+        <div class="project-tech">Python · Gen AI · FastAPI · RAG · NVIDIA NIM</div>
+        <ul class="project-desc">
+          <li>Architected a Retrieval-Augmented Generation (RAG) system to provide spiritual insights grounded exclusively in the spiritual books.</li>
+          <li>Engineered a high-performance ingestion pipeline using embedding model to transform sacred PDFs into semantic vectors stored in a vector database instance.</li>
+          <li>Developed a cross-scriptural synthesis engine leveraging LLM to generate unified answers with precise source citations (Book + Chapter/Verse).</li>
+          <li>Implemented a decoupled full-stack architecture with a FastAPI backend and a lightweight, responsive HTML/JS frontend for seamless user interaction.</li>
+          <li>Optimized retrieval accuracy by configuring custom chunking strategies and semantic similarity thresholds to ensure theological context preservation.</li>
+        </ul>
+        <a href="https://shouvik99-lifeguide.hf.space" target="_blank" class="project-demo-link">
+          Live Demo
+          <svg viewBox="0 0 24 24"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+        </a>
+      </div>
+
     </div>
   </section>
 
@@ -933,6 +1007,15 @@
             <div class="contact-item-text">Shouvik Choudhury</div>
           </div>
         </a>
+        <a href="https://github.com/Shouvik599" target="_blank" class="contact-item">
+          <div class="contact-item-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="var(--accent)" xmlns="http://www.w3.org/2000/svg"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          </div>
+          <div>
+            <div class="contact-item-label">GitHub</div>
+            <div class="contact-item-text">Shouvik599</div>
+          </div>
+        </a>
         <div class="contact-item no-hover" style="cursor:default;">
           <div class="contact-item-icon">📍</div>
           <div>
@@ -950,16 +1033,14 @@
   </footer>
 
   <script>
-    // Mobile Menu Toggle
     const menuBtn = document.querySelector('.menu-toggle');
     const navLinks = document.querySelector('.nav-links');
-    
+
     menuBtn.addEventListener('click', () => {
       navLinks.classList.toggle('active');
       menuBtn.innerHTML = navLinks.classList.contains('active') ? '✕' : '☰';
     });
 
-    // Close menu when clicking a link
     document.querySelectorAll('.nav-links a').forEach(link => {
       link.addEventListener('click', () => {
         navLinks.classList.remove('active');
@@ -967,7 +1048,6 @@
       });
     });
 
-    // Scroll reveal animation
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(e => {
         if (e.isIntersecting) { e.target.classList.add('visible'); }
