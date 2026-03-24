@@ -25,3 +25,32 @@ const observer = new IntersectionObserver(
 );
 
 document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
+
+
+// Typing effect logic
+const typingElement = document.getElementById("typing-text");
+
+if (typingElement) {
+  const text = typingElement.textContent.trim();
+  typingElement.textContent = "";
+
+  let index = 0;
+
+  function typeEffect() {
+  if (index < text.length) {
+    const char = text.charAt(index);
+    typingElement.textContent += char;
+    index++;
+
+    let delay = 25;
+
+    if (char === "," || char === ".") delay = 200;
+    if (char === " ") delay = 10;
+
+    setTimeout(typeEffect, delay);
+  }
+}
+
+  typeEffect();
+}
+
