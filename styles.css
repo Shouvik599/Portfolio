@@ -888,12 +888,8 @@ footer {
     padding: 16px 24px;
   }
 
-  #hero {
-    padding: 120px 24px 60px;
-  }
-
-  section {
-    padding: 80px 24px;
+  #hero + section {
+    padding-top: 40px; /* only first section after hero */
   }
 
   .card,
@@ -955,17 +951,18 @@ footer {
   }
 
   .hero-stats {
-    position: static;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-top: 60px;
-    width: 100%;
-    border-top: 1px solid rgba(92, 60, 25, 0.08);
-    padding-top: 32px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* force 3 equal columns */
+    gap: 12px;
+    margin-top: 40px;
   }
 
   .stat {
-    text-align: left;
+    text-align: center;
+  }
+
+  .stat-num {
+    font-size: 22px; /* prevent overflow */
   }
 
   .contact-grid {
