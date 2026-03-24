@@ -1,4 +1,3 @@
-
 :root {
   --bg: #f6eedf;
   --surface: rgba(255, 248, 236, 0.9);
@@ -78,7 +77,6 @@ body::after {
     rgba(80, 40, 10, 0.25) 100%
   );
 }
-
 
 nav {
   position: fixed;
@@ -218,14 +216,12 @@ nav {
   pointer-events: none;
 }
 
-
 @keyframes pulse {
   0%,
   100% {
     transform: translate(-50%, -50%) scale(1);
     opacity: 0.95;
   }
-
   50% {
     transform: translate(-50%, -50%) scale(1.08);
     opacity: 0.72;
@@ -238,7 +234,6 @@ nav {
     transform: scale(1);
     opacity: 0.9;
   }
-
   50% {
     transform: scale(1.08);
     opacity: 0.68;
@@ -406,7 +401,6 @@ nav {
     opacity: 0;
     transform: translateY(24px);
   }
-
   to {
     opacity: 1;
     transform: translateY(0);
@@ -638,7 +632,6 @@ section {
   font-size: 12px;
 }
 
-/* ── PROJECT DEMO LINK ── */
 .project-demo-link {
   display: inline-flex;
   align-items: center;
@@ -883,13 +876,101 @@ footer {
   transform: translateY(0);
 }
 
+/* Typing effect for hero summary */
+#typing-text {
+  letter-spacing: 0.03em;
+  text-shadow: 0 0 1px rgba(60, 30, 10, 0.2);
+}
+
+/* ============================= */
+/* RESPONSIVE MEDIA QUERIES      */
+/* ============================= */
+
+/* Tablets (1024px and below) */
+@media (max-width: 1024px) {
+  #hero {
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 140px;
+  }
+
+  .hero-content {
+    max-width: 100%;
+  }
+
+  .hero-stats {
+    position: static;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 48px;
+    margin-top: 40px;
+    width: 100%;
+  }
+
+  .stat {
+    text-align: left;
+  }
+
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .edu-card {
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .edu-gpa-label {
+    text-align: left;
+  }
+}
+
+/* Mobile (768px and below) */
 @media (max-width: 768px) {
   nav {
     padding: 16px 24px;
   }
 
+  #hero {
+    padding-top: 120px;
+    padding-bottom: 60px;
+  }
+
+  /* 🔥 Unbox hero-content so its children can interleave with hero-stats */
+  .hero-content {
+    display: contents; 
+  }
+
+  /* Target and order the direct children of the unboxed wrapper */
+  .hero-tag { order: 1; margin-bottom: 20px; }
+  .hero-name { order: 2; }
+  .hero-role { order: 3; }
+  .hero-summary { order: 4; margin-bottom: 24px; }
+  
+  .hero-stats {
+    position: static;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    width: 100%;
+    order: 5; /* 👈 Now sits perfectly below the summary */
+    margin-top: 0;
+    margin-bottom: 32px;
+  }
+
+  .hero-cta {
+    order: 6; /* 👈 Forces buttons underneath the stats */
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 16px;
+  }
+
   #hero + section {
-    padding-top: 40px; /* only first section after hero */
+    padding-top: 40px;
   }
 
   .card,
@@ -922,6 +1003,7 @@ footer {
 
   .nav-links li {
     border-bottom: 1px solid rgba(92, 60, 25, 0.08);
+    width: 100%;
   }
 
   .nav-links li:last-child {
@@ -933,15 +1015,12 @@ footer {
     display: block;
     font-size: 14px;
     letter-spacing: 0.2em;
+    text-align: center;
   }
 
   .nav-links .nav-github {
     padding: 20px 24px;
-  }
-
-  .hero-cta {
-    flex-direction: column;
-    width: 100%;
+    justify-content: center;
   }
 
   .btn-primary,
@@ -950,34 +1029,12 @@ footer {
     text-align: center;
   }
 
-  .hero-stats {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); /* force 3 equal columns */
-    gap: 12px;
-    margin-top: 40px;
-  }
-
   .stat {
     text-align: center;
   }
 
   .stat-num {
-    font-size: 22px; /* prevent overflow */
-  }
-
-  .contact-grid {
-    grid-template-columns: 1fr;
-    gap: 40px;
-  }
-
-  .edu-card {
-    flex-direction: column;
-    align-items: flex-start;
-    text-align: left;
-  }
-
-  .edu-gpa-label {
-    text-align: left;
+    font-size: 22px;
   }
 
   .projects-grid {
@@ -992,44 +1049,8 @@ footer {
   }
 }
 
-/* ============================= */
-/* ✅ RESPONSIVE FIX (SAFE PATCH) */
-/* ============================= */
-
-/* Tablets */
-@media (max-width: 1024px) {
-
-  .hero-stats {
-    position: static;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-top: 40px;
-    width: 100%;
-  }
-
-  .stat {
-    text-align: left;
-  }
-
-  .contact-grid {
-    grid-template-columns: 1fr;
-    gap: 40px;
-  }
-
-  .edu-card {
-    flex-direction: column;
-    align-items: flex-start;
-    text-align: left;
-  }
-
-  .edu-gpa-label {
-    text-align: left;
-  }
-}
-
-/* Small phones */
+/* Small phones (480px and below) */
 @media (max-width: 480px) {
-
   .hero-name {
     font-size: 34px;
   }
@@ -1045,10 +1066,4 @@ footer {
   .section-title {
     font-size: 26px;
   }
-}
-
-/* Typing effect for hero summary */
-#typing-text {
-  letter-spacing: 0.03em;
-  text-shadow: 0 0 1px rgba(60, 30, 10, 0.2);
 }
